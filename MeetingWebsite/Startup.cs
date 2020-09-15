@@ -41,11 +41,12 @@ namespace MeetingWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-
-
-
             services.AddDbContext<EFDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+
+            //services.AddDbContext<EFDbContext>(options =>
+            //   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
 
@@ -138,7 +139,7 @@ namespace MeetingWebsite
 
 
 
-            // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+            SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
 
 
 
