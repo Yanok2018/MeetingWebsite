@@ -169,7 +169,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             var zodiac = _context.Zodiac.FirstOrDefault(z => z.Name == str);
             var city = _context.City.FirstOrDefault(z => z.Name == model.City);
-            var gender = _context.Gender.FirstOrDefault(z => z.Type == model.Gender);
+            Gender gender = _context.Gender.FirstOrDefault(z => z.Type == model.Gender);
 
             var userProfile = new UserProfile()
             {
@@ -178,7 +178,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 DateOfBirth =  DateTime.Parse(model.DateOfBirth),             
                 ZodiacId =zodiac.Id,
                 CityId=city.Id,
-                GenderId= gender.Id
+                GenderId = gender.Id
             };
 
 

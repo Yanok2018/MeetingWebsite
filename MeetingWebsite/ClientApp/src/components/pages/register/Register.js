@@ -223,13 +223,13 @@ class Register extends Component {
  
                           <FormGroup   check inline>
                           <p className="text-muted form-check-label ml-1" >Чол </p>
-                          <Input    invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}  className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="gender" value="Чоловік"      />
+                          <Input    invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}  className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="gender" value="Man"      />
                           <FormFeedback valid={!errorsServer.gender}>{errorsServer.gender}</FormFeedback>
                           <FormFeedback valid={!errors.gender}>{errors.gender}</FormFeedback>
                           </FormGroup>
                           <FormGroup check inline>
                           <p className="text-muted form-check-label ml-1" > Жін</p>
-                          <Input  invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}   className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="gender" value="Жінка" />
+                          <Input  invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}   className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="gender" value="Woman" />
                           <FormFeedback valid={!errorsServer.gender}>{errorsServer.gender}</FormFeedback>
                           <FormFeedback valid={!errors.gender}>{errors.gender}</FormFeedback>
                           </FormGroup>
