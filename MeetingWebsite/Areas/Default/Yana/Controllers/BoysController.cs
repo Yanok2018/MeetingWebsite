@@ -42,13 +42,15 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
         [HttpPost("boys")]
         public async Task<IActionResult> Boys([FromBody]BoysViewModels filter)//model
         {
+          //  BoysViewModels filter = new BoysViewModels();
+         // filter = new BoysViewModels();
             if (!ModelState.IsValid)
             {
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
                 return BadRequest(errors);
             }
 
-            var GenderId = _context.Gender.Where(x => x.Type == "Чоловік").SingleOrDefault();
+            var GenderId = await _context.Gender.Where(x => x.Type == "Man").SingleOrDefaultAsync();
             var a = (DateTime.Now.Year * 100 + DateTime.Now.Month) * 100 + DateTime.Now.Day;
             GetListBoysModel result = new GetListBoysModel();
             result.CurrentPage = filter.CurrentPage;
@@ -93,8 +95,8 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
             List<GetZodiac> GetZodiacs = new List<GetZodiac>();
             List<GetCity> GetCities = new List<GetCity>();
 
-            var city = _context.City.AsQueryable().ToList();
-            var zodiac = _context.Zodiac.AsQueryable().ToList();
+            var city = await _context.City.AsQueryable().ToListAsync();
+            var zodiac = await _context.Zodiac.AsQueryable().ToListAsync();
 
             foreach (var item in city)
             {

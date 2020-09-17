@@ -27,8 +27,8 @@ class Boys extends Component {
     super(props);
     this.state = {
         isLoading: true,
-        tmp_zodiac: {value: 'q', label: 'Зодіак'},
-        tmp_city: {value:'w', label: 'Місто'},
+        tmp_zodiac: {value: '1', label: 'Зодіак'},
+        tmp_city: {value:'1', label: 'Місто'},
         tmp_age_from: {value:'17', label: 'From'},   
         tmp_age_to: {value:'90', label:'To'},
         collapse: true,
@@ -96,12 +96,12 @@ class Boys extends Component {
        }
       
   render() {
-    console.log("Line 50 ===============", this.props);
+    
     const {tmp_city, tmp_zodiac, tmp_age_from, tmp_age_to, avatar} = this.state;
-    console.log("Line 52 ===============", this.props);
+   
     const {listCities, listZodiacs, login} = this.props;
     const {listUsers}= this.props;
-    console.log("this props ==================",this.props);
+   
     let option=[];
     let counter = 0;
    
