@@ -90,7 +90,7 @@ return (
               <h3 className="mb-5">
                 <p className="mb-5 wow fadeInUp ">Найкращий сайт знайомств в Україні</p>
               </h3>
-              <a className=" js-scroll-trigger text-white animated fadeInUp  delay-1s" href="#about"><i className="fas fa-chevron-down "></i></a>
+              {/* <a className=" js-scroll-trigger text-white animated fadeInUp  delay-1s" href="#about"><i className="fas fa-chevron-down "></i></a> */}
             </div>
             <div className="overlay"></div>
           </header>
