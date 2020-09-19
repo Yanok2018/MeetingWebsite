@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MeetingWebsite.Migrations
 {
-    public partial class First : Migration
+    public partial class inition_db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

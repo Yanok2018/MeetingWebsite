@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    [Migration("20200915151443_First")]
-    partial class First
+    [Migration("20200916155701_inition_db")]
+    partial class inition_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
