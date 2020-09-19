@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -23,6 +6,7 @@ import classNames from "classnames";
 import {
   Button,
   Collapse,
+  Dropdown,  
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -32,10 +16,12 @@ import {
   NavbarBrand,
   Navbar,
   NavLink,
+  NavItem,
   Nav,
   Container,
   Modal,
 } from "reactstrap";
+import { Link } from 'react-router-dom';
 import './ChatHeaderStyle.css'
 class UserNavbar extends React.Component {
   constructor(props) {
@@ -88,9 +74,46 @@ class UserNavbar extends React.Component {
 
 
   render() {
+    const { isAuthenticated } = this.props.login;
+    console.log("this.props.login", this.props);
+
 var NavbarClasses="navbar-absolute ChatHeaderStyle"
+const loginLink = (
+  <NavItem className="align-items-center p-2 float-right">
+    <Link to="/login"
+      className="social-link rounded-circle text-white mr-5 " >
+      Вхід
+       </Link>
+  </NavItem>
+);
+const registerLink = (
+  <NavItem className="align-items-center p-2 float-right">
+        <Link to="/register" className="social-link rounded-circle text-white mr-5 "> Реєстрація</Link>
+      </NavItem>
+);
+const logoutLink = (
+  <NavItem className="align-items-center p-2 float-right">
+    <Link to="#/" onClick={e => this.props.onLogout(e)}
+      className="social-link rounded-circle text-white mr-5 ">
+      Вихід
+    </Link>
+  </NavItem>
+);
+const userLink = (
+  <NavItem className="align-items-center p-2 float-right">
+    <Dropdown nav inNavbar isOpen={this.state.isOpen} toggle={this.toggle}>
+      <DropdownToggle nav caret tag={Link} to="/user/profile">
 
-
+        <img style={{ height: 30, width: 30 }}
+          alt="..."
+          className="photo"
+          src={require("assets/img/anime3.png")}
+          // src={`${serverUrl}ClientImages/50_${this.props.login.user.image}`} 
+          />
+      </DropdownToggle>
+    </Dropdown>
+  </NavItem>
+);
     return (
       <React.Fragment>      
         <Navbar
@@ -208,7 +231,13 @@ var NavbarClasses="navbar-absolute ChatHeaderStyle"
                     </NavLink>
                     <DropdownItem divider tag="li" />
                     <NavLink tag="li">
-                      <DropdownItem className="nav-item">Log out</DropdownItem>
+                      <DropdownItem className="nav-item">                      
+              {/* {isAuthenticated ? userLink : null} */}
+              {isAuthenticated ? logoutLink : loginLink}
+              </DropdownItem>
+             {/* {isAuthenticated ? userLink : registerLink} */}
+              {/* {isAuthenticated ? registerLink : null} */}
+               
                     </NavLink>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -239,5 +268,4 @@ var NavbarClasses="navbar-absolute ChatHeaderStyle"
     );
   }
 }
-
 export default UserNavbar;
