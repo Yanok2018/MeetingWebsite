@@ -192,7 +192,7 @@ return (
                     <div className="container text-center text-white ">
                       <h2 className="mx-auto mb-5 font-italic display-4">Дівчину або жінку
                       </h2>
-                      <Link to = "/#">
+                      <Link to = "/girls">
                         <button className="btn btn-dark js-scroll-trigger" >Знайти!</button>
                         </Link>
                     </div>
