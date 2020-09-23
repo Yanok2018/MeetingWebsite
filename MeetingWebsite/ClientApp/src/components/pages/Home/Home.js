@@ -90,7 +90,7 @@ return (
               <h3 className="mb-5">
                 <p className="mb-5 wow fadeInUp ">Найкращий сайт знайомств в Україні</p>
               </h3>
-              <a className=" js-scroll-trigger text-white animated fadeInUp  delay-1s" href="#about"><i className="fas fa-chevron-down "></i></a>
+              {/* <a className=" js-scroll-trigger text-white animated fadeInUp  delay-1s" href="#about"><i className="fas fa-chevron-down "></i></a> */}
             </div>
             <div className="overlay"></div>
           </header>
@@ -192,7 +192,7 @@ return (
                     <div className="container text-center text-white ">
                       <h2 className="mx-auto mb-5 font-italic display-4">Дівчину або жінку
                       </h2>
-                      <Link to = "/#">
+                      <Link to = "/girls">
                         <button className="btn btn-dark js-scroll-trigger" >Знайти!</button>
                         </Link>
                     </div>
