@@ -16,7 +16,7 @@ const UserLayout = React.lazy(() => import('./containers/userLayout'));
 const AdminUsers = React.lazy(() => import('./components/admin/Users'));
 const Login = React.lazy(() => import('./components/pages/login'));
 const Home = React.lazy(() => import('./components/pages/Home'));
-const Girls = React.lazy(() => import('./components/girls'));
+const Girls = React.lazy(() => import('./components/girls/Girls'));
 const Boys = React.lazy(() => import('./components/boys'));
 const Register = React.lazy(() => import('./components/pages/register'));
 const Forgot_Password = React.lazy(() => import('./components/pages/forgot_password'));

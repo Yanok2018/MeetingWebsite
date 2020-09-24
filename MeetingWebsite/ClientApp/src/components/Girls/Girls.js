@@ -17,6 +17,7 @@ import './Girls.css';
 import { serverUrl } from "../../config";
 
 
+
   // const optionsCity = [
   //   {value: "", label: ""},
 
@@ -29,8 +30,8 @@ class Girls extends Component {
         isLoading: true,
         tmp_zodiac: {value: '1', label: 'Зодіак'},
         tmp_city: {value:'1', label: 'Місто'},
-        tmp_age_from: {value:'17', label: 'From'},   
-        tmp_age_to: {value:'90', label:'To'},
+        tmp_age_from: {value:'17', label: 'Від'},   
+        tmp_age_to: {value:'90', label:'До'},
         collapse: true,
         fadeIn: true,
         timeout: 300,
