@@ -48,6 +48,7 @@ const optionsYear = [
   { value: '2018', label: '2018р' },
   { value: '2019', label: '2019р' },
   { value: '2020', label: '2020р' },
+  { value: '2021', label: '2021р' },
 ];
 
 
@@ -58,8 +59,8 @@ class UserTable extends React.Component {
     this.state = {
     isLoading: true,
     tmp_NickName: '',
-    tmp_month: { value: '11', label: 'Листопад' },
-    tmp_year: { value: '2019', label: '2019р' }, 
+    tmp_month: { value: '09', label: 'Вересень' },
+    tmp_year: { value: '2020', label: '2020р' }, 
     modal: false,
     danger: false,
     temp_id:'',

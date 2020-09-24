@@ -20,14 +20,14 @@ var routes = [
     component: UserTable,
     layout: "/admin"
   },
-  {
-    path: "/admins",
-    name: "Таблиця-адмінов",
-    rtlName: "الرموز",
-    icon: "tim-icons icon-key-25",
-    component: AdminTable,
-    layout: "/admin"
-  },
+  //{
+ //   path: "/admins",
+   // name: "Таблиця-адмінов",
+  //  rtlName: "الرموز",
+//icon: "tim-icons icon-key-25",
+  // component: AdminTable,
+  //  layout: "/admin"
+ // },
   {
     path: "/schedule-attendance",
     name: "Графік активності",
@@ -45,14 +45,14 @@ var routes = [
     layout: "/admin"
   },
   
-  {
-    path: "/vip-users",
-    name: "VIP таблиця",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-shape-star",
-    component: VipTable,
-    layout: "/admin"
-  },
+ // {
+ //   path: "/vip-users",
+ //   name: "VIP таблиця",
+ //   rtlName: "لوحة القيادة",
+ //   icon: "tim-icons icon-shape-star",
+ //   component: VipTable,
+  //  layout: "/admin"
+ // },
   {
     path: "/ban-list",
     name: "Бан таблиця",
@@ -61,21 +61,21 @@ var routes = [
     component: BanTable,
     layout: "/admin"
   },
-  {
-    path: "/mute-list",
-    name: "Мут таблиця",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-volume-98",
-    component: MuteTable,
-    layout: "/admin"
-  },
-  {
-    path: "/complaints",
-    name: "Скарги",
-    rtlName: "الرموز",
-    icon: "tim-icons icon-key-25",
-    component: Complaints,
-    layout: "/admin"
-  }
+ // {
+ //   path: "/mute-list",
+ //   name: "Мут таблиця",
+ //   rtlName: "لوحة القيادة",
+//    icon: "tim-icons icon-volume-98",
+ //   component: MuteTable,
+ //   layout: "/admin"
+ // },
+ // {
+ //   path: "/complaints",
+  //  name: "Скарги",
+  //  rtlName: "الرموز",
+  //  icon: "tim-icons icon-key-25",
+  //  component: Complaints,
+  //  layout: "/admin"
+ // }
 ];
 export default routes;
