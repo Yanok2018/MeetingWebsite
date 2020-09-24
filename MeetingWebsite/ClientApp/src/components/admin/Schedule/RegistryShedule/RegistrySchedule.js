@@ -77,6 +77,7 @@ const optionsYear = [
   { value: '2018', label: '2018р' },
   { value: '2019', label: '2019р' },
   { value: '2020', label: '2020р' },
+  { value: '2021', label: '2021р' },
 ];
 
 class RegistrySchedule extends React.Component {
@@ -86,7 +87,7 @@ class RegistrySchedule extends React.Component {
     this.state = {
       bigChartData: "data1",
       isLoading: true,
-      tmp_year: { value: '2019', label: '2019р' },   
+      tmp_year: { value: '2020', label: '2020р' },   
     };
   }
 
