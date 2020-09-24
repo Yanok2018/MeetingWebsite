@@ -1,8 +1,9 @@
 import axios from "axios";
-import {serverUrl} from '../../../config';
+import {serverUrl} from '../../config';
 
 export default class GirlsService {
     static girls(model) {
-        return axios.post(`${serverUrl}api/account/girls`, model)
+        console.log("!111111111111111111111111111111111111111111111111", model);
+        return axios.post(`${serverUrl}api/girls/girls`, model)
     };
 }

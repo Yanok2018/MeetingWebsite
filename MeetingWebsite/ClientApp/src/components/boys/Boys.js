@@ -29,8 +29,8 @@ class Boys extends Component {
         isLoading: true,
         tmp_zodiac: {value: '1', label: 'Зодіак'},
         tmp_city: {value:'1', label: 'Місто'},
-        tmp_age_from: {value:'17', label: 'From'},   
-        tmp_age_to: {value:'90', label:'To'},
+        tmp_age_from: {value:'17', label: 'Від'},   
+        tmp_age_to: {value:'90', label:'До'},
         collapse: true,
         fadeIn: true,
         timeout: 300,
@@ -171,7 +171,7 @@ class Boys extends Component {
 
                 <Row className="container text-white mt-5 mb-5 pl-0 pr-0" >
                   {
-                    listUsers.map(item => {
+                     listUsers.map(item=> {
                       return (
                         <Col xs="12" sm="4" md="3" >
                           <Card className="border-primary">
