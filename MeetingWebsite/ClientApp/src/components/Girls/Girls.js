@@ -1,239 +1,252 @@
 import React, { Component } from 'react';
-//  import Girl1 from "../img/Girl1.jpg";
- import Girl1 from "../../assets/img/Girl1.jpg"
- import Girl2 from "../../assets/img/Girl2.jpg"
- import Girl3 from "../../assets/img/Girl3.jpg"
- import Girl4 from "../../assets/img/Girl4.jpg"
- import Girl5 from "../../assets/img/Girl5.jpg"
- import Girl6 from "../../assets/img/Girl6.jpg"
- import Girl7 from "../../assets/img/Girl7.jpg"
- import Girl8 from "../../assets/img/Girl8.jpg"
- import Girl9 from "../../assets/img/Girl9.jpg"
- import Girl10 from "../../assets/img/Girl10.jpg"
- import Girl11 from "../../assets/img/Girl11.jpg"
- import Girl12 from "../../assets/img/Girl12.jpg"
-import { Link } from 'react-router-dom';
-import { Button, Card, CardBody,CardHeader, CardFooter, CardGroup,
-         Col, Container,Label, Form,FormGroup,PaginationLink,Pagination,PaginationItem,PaginationItemProps, Input, InputGroup,
-         InputGroupAddon, InputGroupText, Row,hr } from 'reactstrap';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import * as loginActions from './reducer';
+import Select from 'react-select';
+//import { Link } from 'react-router-dom';
+import { Row,Fade,CardHeader,FormGroup,InputGroupButtonDropdown,
+  DropdownToggle,DropdownMenu,CardFooter,DropdownItem,Button, 
+  Card, CardBody, Col, Container, Form, Input, InputGroup} from 'reactstrap';
 import get from "lodash.get";
+import * as getListActions from './reducer';
+import { connect } from 'react-redux';
+import './style.scss';
+import '../pages/Home/instruments/scss/palette.scss';
+import Paginator from '../Paginator';
+import Header from '../pages/Home/NavBar';
+import Footer from '../pages/Home/Footer';
+import { logout } from '../pages/login/reducer';
 import './Girls.css';
+import { serverUrl } from "../../config";
 
 
-//import EclipseWidget from '../../eclipse';
+  // const optionsCity = [
+  //   {value: "", label: ""},
+
+  // ];
+ 
 class Girls extends Component {
-  state = {
-    email: '',
-    password: '',
-    profileUrl: '',
-    errors: {},
-    done: false,
-    isLoading: false,
-    visible: false,
-    errorsServer: {}
-  }
-  
-
-  
-
-  
-  onSubmitForm = (e) => {
-    e.preventDefault();
-    const { email, password, errorsServer } = this.state;   
-
-    let errors = {};
-    const regex_password = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,24}$/;
-    const regex_email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-
-    if (!regex_email.test(email)) errors.email = "Не правильний формат електронної пошти!";
-    if (email === "") errors.email = "Поле не може бути пустим!";
-
-    if (!regex_password.test(password)) errors.password = "Пароль повинен мати мінімум 6 символів на латиниці, нижній і верхній регістр, та цифри!";
-    if (password === "") errors.password = "Поле не може бути пустим!";
-
-    const isValid = Object.keys(errors).length === 0
-    if (isValid) {
-      this.setState({ isLoading: true });
-      const model = {
-        email: email,
-        password: password
-        };
-
-      this.props.login(model);      
+  constructor(props) {
+    super(props);
+    this.state = {
+        isLoading: true,
+        tmp_zodiac: {value: '1', label: 'Зодіак'},
+        tmp_city: {value:'1', label: 'Місто'},
+        tmp_age_from: {value:'17', label: 'From'},   
+        tmp_age_to: {value:'90', label:'To'},
+        collapse: true,
+        fadeIn: true,
+        timeout: 300,
+        currentPage: 1,
+        temp_currentpage: 1,
+        totalCount: 0,
+      };
+      this.onClickPage = this.onClickPage.bind(this);
     }
-    else {
-      this.setState({ errors });
-    }
-  }
+       
+      handleChange = (name, selectValue) => {
+        this.setState({ [name]: selectValue }, this.filterSearchGirls);
+      }
+      
+      sendFilters = () => {
+        console.log("STATEEEEEEEEEEEEEEEEE222222222E",this.state)
+        const { tmp_age_from,tmp_age_to, tmp_zodiac, tmp_city } = this.state;  
+        let city = tmp_city.value;
+        let zodiac = tmp_zodiac.value;
+        let age_from = tmp_age_from.value;
+        let age_to = tmp_age_to.value; 
+        console.log("STATEEEEEEEEEEEEEEEEEE",this.state)
+        const model = {
+          city: city,
+          age_from: age_from,
+          age_to: age_to,
+          zodiac: zodiac,
+          };
+  
+        this.props.girls(model);      
+      }
+    
+      filterSearchGirls = () => {
+        const {tmp_zodiac, tmp_city, tmp_age_from, tmp_age_to, currentPage} = this.state;
+        let zodiacId = tmp_zodiac.value;
+        let cityId = tmp_city.value;
+        let age_from = tmp_age_from.value;
+        let age_to = tmp_age_to.value; 
+        this.props.getGirlsData({zodiacId, cityId, age_from, age_to, currentPage});
+      }
+      
+      componentDidMount = () => {
+        const { tmp_city, tmp_zodiac,tmp_age_to, tmp_age_from, currentPage } = this.state;
+        let zodiac = tmp_zodiac.value;
+        let city = tmp_city.value;
+        let age_from = tmp_age_from.value;
+        let age_to = tmp_age_to.value; 
+        this.props.getGirlsData({zodiac, city, age_from, age_to, currentPage });
+      }
+
+      onClickPage(pageNumber) {
+        // const { typeOfSort, sortByAscending } = this.props;
+         console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+         const { tmp_city,tmp_zodiac,tmp_age_from, tmp_age_to} = this.state;        
+         let city = tmp_city.value;
+         let zodiac = tmp_zodiac.value;
+         let age_from = tmp_age_from.value;
+         let age_to = tmp_age_to.value;
+         let currentPage = pageNumber;
+         this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
+         //this.props.getBansData({ year,month,nickname,currentPage: pageNumber,totalCount:this.props.totalCount });
+         this.props.getGirlsData({city,zodiac,age_from,age_to,currentPage: pageNumber, totalCount:this.props.totalCount});
+       }
+      
   render() {
-    const { errors, isLoading, profileUrl, visible, errorsServer } = this.state;
+    
+    const {tmp_city, tmp_zodiac, tmp_age_from, tmp_age_to, avatar} = this.state;
+   
+    const {listCities, listZodiacs, login} = this.props;
+    const {listUsers=[]}= this.props;
+   
+    console.log(listUsers);
+    let option=[];
+    let counter = 0;
+   
+    for (let i = 18; i<90; i++)
+    {
+      option[counter++]={value:`${i}`, label:`${i}`};
+    }
+    for (let q = 18; q<90; q++)
+    {
+      option[counter++]={value:`${q}`, label:`${q}`};
+    }
+
+    const mappedListGirls = listUsers.map(item => {
+      return (
+        <Col xs="12" sm="4" md="3"  key={item.name}>
+          <Card className="border-primary">
+            <CardBody>
+              <div key={item.id}>
+                <img alt="photo" className="img-fluid" 
+                // src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB"
+                src={`${serverUrl}${item.avatar}?t=${new Date().getTime()}`}
+               />
+              </div>
+              <Row>
+                <strong className="ml-3">{item.name}</strong>
+                <p className="ml-2">   {item.age}</p>
+              </Row>
+              <Row>
+                <p className="ml-3">{item.city}, Україна</p>
+              </Row>
+              <Row>
+                <p className="ml-3"> {item.zodiac}</p>
+              </Row>
+
+
+            </CardBody>
+          </Card>
+        </Col>
+      )
+    });
+
     return (
+      <React.Fragment>
+        <Header onLogout={e => this.signOut(e)}
+          login={login} />      
+         <h2 style={{textAlign: "center"}}>Знайомства з дівчатами в Україні</h2>
       <div className="app flex-row align-items-center">
-        <Container>
-         <div className="Poisk">
-         <Card>
-              <CardHeader>
-                <strong>Пошук</strong> 
+       {/* <Container className="fontyana"> */}
+       <Container>
+        <div className="Poisk">
+        {/* <Card className="bgyana"> */}
+        <Card>
+              <CardHeader >
+              <strong>Пошук</strong> 
+                {/* <h3 style={{color:"#c0c0c0", marginBottom:"5px"}}> <strong>Пошук</strong> </h3> */}
               </CardHeader>
-              <CardBody>
-                <Form action="" method="post" inline>
+              <CardBody style={{marginTop: "-10px"}} >
+                <Form onSubmit={this.sendFilters} action="" method="post" className="form-horizontal">
+                  <FormGroup row >              
+                    <Col xs = "3" >
+                    <Select 
+                        value={tmp_city}
+                        onChange={(e) => this.handleChange("tmp_city", e)}
+                        options={listCities} style={{background:"red"}}/>
+                    </Col>
+               
+                    <Col xs = "3">
+                    <Select
+                        value={tmp_zodiac}
+                        onChange={(e) => this.handleChange("tmp_zodiac", e)}
+                        options={listZodiacs} />
+                    </Col>
                   
-                  <FormGroup className="pr-1">
-                   
-                    <Input  type="email" id="exampleInputEmail1" placeholder="Київська область, Київ                                            ▾" required />
+                    <Col xs = "3">
+                      <Select
+                        value={tmp_age_from}
+                        onChange={(e) => this.handleChange("tmp_age_from", e)}
+                        options={option} />
+                    </Col>
+                    <Col xs = "3">
+                      <Select
+                        value={tmp_age_to}
+                        onChange={(e) => this.handleChange("tmp_age_to", e)}
+                        options={option} />
+                    </Col>
                   </FormGroup>
-                  <FormGroup className="pr-1">
-                    
-                    <Input type="email" id="exampleInputEmail2" placeholder="Вік(мін)" required />
-                  </FormGroup>
-                  
-                  <FormGroup className="pr-1">
-                    
-                    <Input type="email" id="exampleInputEmail2" placeholder="Вік(макс)" required />
-                  </FormGroup>
-                  
-                  
-                  
-                    
-                  
-                  <FormGroup className="pr-1">
-                    
-                    <Input type="email" id="exampleInputEmail2" placeholder="Знак зодіаку: Водолій" required />
-                  </FormGroup>
-                  
                 </Form>
               </CardBody>
-              
             </Card>
-         </div>
-         <Container>
-          <div className="GirlsProfile"> 
-            <img src = {Girl1} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Ірина  23 роки</Label>
-            <Label className="City">Україна, Київ</Label>
-            
-            
-          </div>
-          <div className="GirlsProfile"> 
-            <img src = {Girl2} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Ольга  22 роки</Label>
-            <Label className="City">Україна, Житомир</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl3} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Дарья  24 роки</Label>
-            <Label className="City">Україна, Тернопіль</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl4} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Ірина  19 років</Label>
-            <Label className="City">Україна, Біла Цервка</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl5} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Євгенія  19 років</Label>
-            <Label className="City">Україна, Харків</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl6} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Марго  29 років</Label>
-            <Label className="City">Україна, Одеса</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl7} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Олександра  29 років</Label>
-            <Label className="City">Україна, Київ</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl8} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Марія  37 років</Label>
-            <Label className="City">Україна, Київ</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl9} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Мілана  25 років</Label>
-            <Label className="City">Україна, Київ</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl10} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Ірина  23 роки</Label>
-            <Label className="City">Україна, Київ</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl11} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Софія  26 років</Label>
-            <Label className="City">Україна, Київ</Label>
-          </div>  
-          <div className="GirlsProfile"> 
-            <img src = {Girl12} id="Girl1" className="girlsimg"/> 
-            <Label className="Name" >Каріна  23 роки</Label>
-            <Label className="City">Україна, Київ</Label>
-          </div>  
-         </Container>
-         <footer>
-         <div className="Down">
-         <Container>
+            </div>
+            </Container>
 
-         <Card id="Pagination">
-          
-          <CardBody>
-            <Pagination size="lg" >
-              <PaginationItem>
-                <PaginationLink previous tag="button" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink tag="button">
-                  1
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink tag="button">
-                  2
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink tag="button">
-                  3
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem className="d-none d-sm-block">
-                <PaginationLink next tag="button" />
-              </PaginationItem>
-            </Pagination>
-           
-              </CardBody>
-              </Card>
-              
-         </Container>
-        
-         </div>
-         </footer>
-        </Container>
       </div>
+      <section className=" text-white content-section bg-about">
+            <div className="container" >
+              <div className="row align-items-center">
+
+                <Row className="container text-white mt-5 mb-5 pl-0 pr-0" >
+                  {
+                     mappedListGirls
+                  }
+                  
+                </Row>
+              </div>
+            </div>
+          </section>
+
       
+      <div className="row justify-content-md-center">
+        <div className="col col-lg-2">          
+        </div>
+        <div className="col-md-auto">
+        <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
+      </Paginator>
+        </div>
+        <div className="col col-lg-2">          
+        </div>
+      </div>
+      <Footer></Footer>
+      </React.Fragment>
     );
   }
 }
 
-
-
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  console.log("mapStateToProps======Girls=", state);
   return {
-  //  loading: get(state, 'login.post.loading'),
-  //  failed: get(state, 'login.post.failed'),
-   // success: get(state, 'login.post.success'),
-   // errors: get(state, 'login.post.errors')
+    listUsers: get(state, "girls.list.getListGirls"),
+    listCities: get(state,"girls.list.getCities"),
+    listZodiacs: get(state, "girls.list.getZodiacs"),
+    isListLoading: get(state, "girls.list.loading"),  
+    login: state.login,    
+  };  
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getGirlsData: filter => {
+      dispatch(getListActions.getGirlsData(filter));
+    },
+    logout: filter => {
+      dispatch(logout(filter));
+    }
   }
 }
 
-const mapDispatch = {
-  //login: (model, history) => {
-  //    return loginActions.login(model, history);
-  //}
-}
-
-export default connect(mapStateToProps, mapDispatch)(Girls);
+export default connect(mapStateToProps, mapDispatchToProps)(Girls);

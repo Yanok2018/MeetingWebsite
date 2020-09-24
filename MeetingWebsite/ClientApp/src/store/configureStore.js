@@ -14,6 +14,7 @@ import {adminTableReducer} from '../components/admin/Tables/AdminTable/reducer';
 import {vipTableReducer} from '../components/admin/Tables/VipTable/reducer';
 // import { registerReducer } from '../components/pages/register/reducer'; 
 import { boysReducer } from '../components/boys/reducer';
+import { girlsReducer } from '../components/girls/reducer';
 import { getChatsReducer, sendMessageReducer, informBackReducer } from '../containers/userLayout/reducer';
 import {getMessagesReducer} from '../components/Chat/chat/reducer'
 import { homeReducer } from '../components/pages/Home/reducer';
@@ -39,7 +40,8 @@ export default function configureStore(history, initialState) {
         home: homeReducer,
         chats:getChatsReducer,
         sendMessage:sendMessageReducer,
-        informBack:informBackReducer
+        informBack:informBackReducer,
+        girls: girlsReducer
     };
 
     const middleware = [

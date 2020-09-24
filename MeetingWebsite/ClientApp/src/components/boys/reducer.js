@@ -25,7 +25,7 @@ export const getBoysData = (model) => {
         dispatch(getListActions.started());
             BoysService.boys(model)
             .then((response) => {
-                console.log("+++++++++++Response", response);
+               // console.log("+++++++++++Response", response);
                 dispatch(getListActions.success(response.data));               
             }, err=> { throw err; })
             .catch(err=> {
@@ -41,7 +41,7 @@ export const getListActions = {
         }
     },  
     success: (data) => {
-        console.log("+++++++++++Data", data);
+       // console.log("+++++++++++Data", data);
         return {
             type: BOYS_SUCCESS,
             payload: data, 

@@ -171,7 +171,7 @@ class Boys extends Component {
 
                 <Row className="container text-white mt-5 mb-5 pl-0 pr-0" >
                   {
-                    listUsers.map(item => {
+                     listUsers.map(item=> {
                       return (
                         <Col xs="12" sm="4" md="3" >
                           <Card className="border-primary">

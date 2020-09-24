@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
-import UserNavBar from "./UserNavBar";
+import UserNavBar from "../../components/pages/Home/NavBar";
 import UserSideBar from "./UserSideBar";
 import { connect, Provider } from "react-redux";
 import get from "lodash.get";
@@ -133,7 +133,10 @@ class UserLayout extends React.Component {
     var content = (
       <React.Fragment>
 
+
         <div className="wrapper">
+
+
           <UserSideBar
             MyID={localStorage.getItem("MYID")}
             ActiveRecipient={localStorage.getItem("ActiveRecipient")}
@@ -146,15 +149,17 @@ class UserLayout extends React.Component {
               imgSrc: logo
             }}
             toggleSidebar={this.toggleSidebar}
-            
-          />{console.log("Hi")}
+          />
+          
+          {console.log("Hi")}
+          
           <div  
           id="content"
             className="main-panel"
             ref="mainPanel"
             data={this.state.backgroundColor}
-            
           >
+
             <UserNavBar
               {...this.props}
               brandText={this.getBrandText(this.props.location.pathname)}
@@ -162,16 +167,25 @@ class UserLayout extends React.Component {
               sidebarOpened={this.state.sidebarOpened}
               HeaderPanerStyle="ChatStyle"
             />
-            <Switch key="switch">{this.getRoutes(this.props.routes.chats)}<Route
+
+            <Switch key="switch">{this.getRoutes(this.props.routes.chats)}
+            
+            <Route
             path="/profile"
             component={ChatLayout}
-            key="profile"></Route></Switch>
+            key="profile"></Route>
+            
+            </Switch>
+          
           </div>
         </div>
+
+
+
       </React.Fragment>
     )
     return isAccess?(content):(<Redirect to="/login" />)
-  //);
+ 
   }
 }
 const mapStateToProps = state => {
