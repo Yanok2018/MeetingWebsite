@@ -4,7 +4,7 @@ import { Nav, NavItem, NavLink, Dropdown, DropdownMenu, DropdownItem, DropdownTo
 import './instruments/css/palette.css';
 import { catchClause } from '@babel/types';
 import logo from './instruments/img/logo.jpg';
-import { connect } from 'tls';
+import { connect } from 'react-redux';
 import { logout } from '../login/reducer';
 import { withRouter } from 'react-router-dom';
 import { serverUrl } from "../../../config";
@@ -27,7 +27,7 @@ class Header extends Component {
 
       const logoutLink = (
         <NavItem className="align-items-center p-2 float-right">
-          <Link to="#/" onClick={e => this.props.onLogout(e)}
+          <Link to="/" onClick={e => this.props.logout(e)}
             className="social-link rounded-circle text-white mr-5 ">
             Вихід
           </Link>
@@ -99,5 +99,5 @@ const mapStateToProps = state => {
   };
 }
 
-export default Header;
-//export default withRouter(connect( mapStateToProps, null, { logout })(Header));
+//export default Header;
+export default withRouter(connect( mapStateToProps, { logout })(Header));
