@@ -181,7 +181,7 @@ namespace MeetingWebsite
             });
             //app.UseSignalR(routes =>
             //{
-            //    routes.MapHub<ChatHub>("chat");
+            //    routes.MapHub<ChatHub>("/chat");
             //});
             //app.UseSignalR(route =>
             //{

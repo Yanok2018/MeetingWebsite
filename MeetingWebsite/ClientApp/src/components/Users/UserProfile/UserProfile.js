@@ -148,7 +148,7 @@ this.setState({avatar: nextProps.user.avatar});
 
     render() {
         if (!this.props.user) {
-            return (<div>хрень {this.props.user}</div>)
+            return (<div>Помилка {this.props.user}</div>)
         }
 
         const { nickName, description, age, gender, zodiac, email, avatar } = this.state;

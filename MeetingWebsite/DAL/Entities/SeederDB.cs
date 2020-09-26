@@ -250,6 +250,8 @@ namespace MeetingWebsite.DAL.Entities
             context.SaveChanges();
         }
 
+        
+
         public static void SeedData(IServiceProvider services, IHostingEnvironment env, IConfiguration config)
         {
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
