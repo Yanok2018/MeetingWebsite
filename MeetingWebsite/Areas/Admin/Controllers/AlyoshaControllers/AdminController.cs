@@ -27,26 +27,27 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
         public ActionResult GetAminTable()
 
         {
-        {
-            var models = _context.AdminProfiles.AsQueryable();
-            AdminTableModels atms = new AdminTableModels();
-            atms.Admins = new List<AdminTableModel>();
-            foreach (var item in models)
             {
-                AdminTableModel atm = new AdminTableModel();
-                atm.Id = item.Id;
-                
-                atm.Nickname = item.Name;
+                var models = _context.AdminProfiles.AsQueryable();
+                AdminTableModels atms = new AdminTableModels();
+                atms.Admins = new List<AdminTableModel>();
+                foreach (var item in models)
+                {
+                    AdminTableModel atm = new AdminTableModel();
+                    atm.Id = item.Id;
 
- 
-                //arm.Registrdate = item.DateOfBirth;
-                //string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
-                //urm.City = city;
-                atm.Status = "Активный";
-                atms.Admins.Add(atm);
-                
+                    atm.Nickname = item.Name;
+
+
+                    //arm.Registrdate = item.DateOfBirth;
+                    //string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
+                    //urm.City = city;
+                    atm.Status = "Активный";
+                    atms.Admins.Add(atm);
+
+                }
+                return Ok(atms.Admins);
             }
-            return Ok(atms.Admins);
         }
 
         [HttpPost("vips")] //UserTableFilters
