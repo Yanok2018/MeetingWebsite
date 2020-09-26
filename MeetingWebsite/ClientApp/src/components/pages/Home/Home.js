@@ -120,7 +120,7 @@ return (
                           <Card className="border-primary">
                             <CardBody>
                               <div key={item.id}>
-                                <img alt="photo" className="img-fluid"  src={`${serverUrl}${item.avatar}?t=${new Date().getTime()}`}/> 
+                                <img height='200' width= '200' alt="" className="avatar"  src={`${serverUrl}${item.avatar}?t=${new Date().getTime()}`}/> 
                               </div>
                               <Row>
                                 <strong className="ml-3 text-secondary">{item.name}</strong>

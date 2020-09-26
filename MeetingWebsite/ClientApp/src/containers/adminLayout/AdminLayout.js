@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
-import AdminNavbar from "./AdminNavBar";
+import AdminNavbar from "../../../src/components/pages/Home/NavBar";
 import AdminSideBar from "./AdminSideBar";
 import { Container, Row } from 'reactstrap';
 import { logout } from '../../components/pages/login/reducer';

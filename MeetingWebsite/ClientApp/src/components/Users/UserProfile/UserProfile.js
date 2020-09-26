@@ -174,7 +174,7 @@ this.setState({avatar: nextProps.user.avatar});
                     <Col md="12">
                         <Card>
                             <CardHeader>
-                              <h5 className="title">Редагувати профіль</h5>
+                              <h5 className="title">Редагуватфи профіль</h5>
                             </CardHeader>
                             <CardBody>
                                 <Form>
