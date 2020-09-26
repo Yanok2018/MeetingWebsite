@@ -213,8 +213,8 @@ namespace MeetingWebsite.Areas.Account.Controllers
           $"<br/>" +
           $"Ви успішно пройшли реєстрацію" +
           $"<br/>" +
-          $"<br/>" +
-          $"Для входу нажміть на посилання:    <a href='https://idealcrud.azurewebsites.net/#/login'>Перейти</a>");
+          $"<br/>" );
+          //$"Для входу нажміть на посилання:    <a href='https://idealcrud.azurewebsites.net/#/login'>Перейти</a>");
 
             return Ok(
                new
