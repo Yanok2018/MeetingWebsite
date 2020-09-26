@@ -170,7 +170,7 @@ this.setState({avatar: nextProps.user.avatar});
                 </ModalBody>
             </Modal>
             <div className="content">
-                <Row>
+                <Row >
                     <Col md="12">
                         <Card>
                             <CardHeader>
@@ -178,7 +178,7 @@ this.setState({avatar: nextProps.user.avatar});
                             </CardHeader>
                             <CardBody>
                                 <Form>
-                                    <Row>
+                                    <Row className="container text-white mt-5 mb-5 pl-0 pr-0" >
                                         <Col className="pr-md-1" md="4">
                                             <FormGroup>
                                                 
