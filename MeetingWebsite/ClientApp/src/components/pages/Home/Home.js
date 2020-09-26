@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, Col, Row} from 'reactstrap';
+import { Card, CardBody, Col, Row, Modal, ModalBody} from 'reactstrap';
 import './instruments/css/palette.css';
 import { connect } from 'react-redux';
 import get from "lodash.get";
@@ -8,8 +8,17 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../eclipse';
 import Header from './NavBar';
 import Footer from './Footer';
+import { ImagePicker } from 'react-file-picker'
 import { logout } from '../login/reducer';
 import { serverUrl } from "../../../config";
+import Cropper from "react-cropper";
+import 'cropperjs/dist/cropper.css';
+import * as editUserActions from '../../Users/UserProfile/reducer';
+import * as getUserActions from '../../Users/UserProfile/reducer';
+
+const cropper = React.createRef(null);
+const Avatar = "assets/img/emilyz.jpg";
+
 
 //import { transform } from '@babel/core';
  const items = [
@@ -69,10 +78,24 @@ signOut=(e)=> {
    if (this.animating) return;
    this.setState({ activeIndex: newIndex });
  }
+ 
+ _crop() {
+  // image in dataUrl
+   console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+}
+
+getCroppedImage = img => {
+  this.setState({
+  //   avatar: img,
+    showCropper: false
+  });
+  console.log("CROPER ==============", img);
+  this.props.editPhoto(img);
+}
 
 render() {
 //const {activeIndex, listUsers, isListLoading} = this.state;
-const {isListLoading, listUsers, login} = this.props; 
+const {isListLoading, listUsers, login, avatar} = this.props; 
 console.log("listUsers", listUsers);
 
 return (
@@ -107,6 +130,22 @@ return (
               </div>
             </div>
           </section>
+
+
+
+          <Modal isOpen={false}>
+                <ModalBody>
+                <Cropper
+                    ref={cropper}
+                        src='https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                    style={{ height: 400, width: '100%' }}
+                    // Cropper.js options
+                    aspectRatio={1 / 1}
+                    guides={false}
+                        crop={this._crop.bind(this)} />
+                </ModalBody>
+            </Modal>
+
 
 
           <section className=" text-white content-section bg-about">
@@ -227,6 +266,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     logout: filter => {
       dispatch(logout(filter));
+    },
+    setUserData: filter => {
+      dispatch(editUserActions.setUserData(filter));
+  },
+    editPhoto: avatar => {
+      dispatch(editUserActions.editPhoto(avatar));
     }
   }
 }
