@@ -2,7 +2,7 @@ import React from "react";
 import Select from 'react-select';
 import * as getUserActions from './reducer';
 import * as editUserActions from './reducer';
-//import { ImagePicker } from 'react-file-picker'
+import { ImagePicker } from 'react-file-picker'
 import 'cropperjs/dist/cropper.css';
 import { connect } from 'react-redux';
 import get from "lodash.get";
@@ -134,7 +134,7 @@ this.setState({avatar: nextProps.user.avatar});
 
     _crop() {
         // image in dataUrl
-        // console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+         console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
     }
     
     getCroppedImage = img => {

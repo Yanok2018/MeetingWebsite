@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import UserNavBar from "../../components/pages/Home/NavBar";
-import UserSideBar from "./UserSideBar";
+import UserSideBar from "../../components/Users/UserProfile/UserProfile";
 import { connect, Provider } from "react-redux";
 import get from "lodash.get";
 import * as getListActions from './reducer';
@@ -132,7 +132,6 @@ class UserLayout extends React.Component {
         }
     var content = (
       <React.Fragment>
-
 
         <div className="wrapper">
 
